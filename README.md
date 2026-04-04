@@ -34,3 +34,13 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ```
 使用travel_plan帮我创建一份旅游计划
 ```
+
+## work-summary：工作小结生成
+安装方法:
+```
+从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/work-summary安装skills 到 ~/.codeartsdoer/skills/
+```
+使用方法：
+```
+使用work-summary帮忙创建一份工作总结
+```
