@@ -6,9 +6,9 @@ openclaw_setup.zip的在线下载链接：[https://res-static.hc-cdn.cn/cloudbu-
 官方帮助文档：[https://support.huaweicloud.com/usermanual-codeartssnap/codeartsdoer_ug_0024.html](https://support.huaweicloud.com/usermanual-codeartssnap/codeartsdoer_ug_0024.html)
 
 
-## 使用Prompt安装
+## 安装配置openclaw
 ```
-从https://gitcode.com/JeffDing/openclaw_setup 安装skills 到 ~/.codeartsdoer/skills/
+使用openclaw_setup技能安装并配置OpenClaw
 ```
 
 ## 华为云码道（CodeArts）代码智能体Skill快速安装OpenClaw教程地址
