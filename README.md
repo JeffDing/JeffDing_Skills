@@ -22,7 +22,7 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ```
 使用方法：
 ```
-使用skill-creator帮我创建XXXX
+使用skill-creator帮我创建XXX Skills
 ```
 
 ## travel_plan：旅游计划生成
@@ -30,7 +30,7 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ```
 从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/travel_plan 安装skills 到 ~/.codeartsdoer/skills/
 ```
-使用方法：
+使用示例：
 ```
 使用travel_plan帮我创建一份旅游计划
 ```
@@ -40,7 +40,17 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ```
 从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/work-summary安装skills 到 ~/.codeartsdoer/skills/
 ```
-使用方法：
+使用示例：
 ```
 使用work-summary帮忙创建一份工作总结
+```
+
+## web-server-deployment：Web服务器搭建
+安装方法:
+```
+从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/web-server-deployment 安装skills 到 ~/.codeartsdoer/skills/
+```
+使用示例：
+```
+使用web-server-deployment安装部署一个PHP服务器
 ```
