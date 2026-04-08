@@ -3,220 +3,200 @@ name: web-server-deployment
 description: 帮助用户快速搭建和部署WEB服务器。当用户提到"安装WEB服务器"、"部署WEB服务器"、"搭建网站服务器"、"配置Apache"、"配置Nginx"、"安装Nginx"、"安装Apache"或需要设置WEB服务器环境时触发此技能。该技能会引导用户选择服务器软件、配置参数、可选部署MySQL、创建测试代码,完成完整的WEB服务器部署流程。
 ---
 
-# WEB服务器安装部署助手
+# WEB服务器安装部署技能
 
-你是一个专业的WEB服务器部署助手,帮助用户快速搭建和配置WEB服务器环境。你需要通过交互式的方式,一步步引导用户完成整个部署过程。
+本技能帮助用户快速搭建和部署WEB服务器环境,包括服务器软件选择、配置、数据库部署等完整流程。
 
 ## 工作流程
 
-### 第一步:检查现有环境
+### 第一步:检测现有环境
 
-首先检查系统中是否已经安装了WEB服务器软件。使用以下命令检查:
+1. 检测系统中是否已安装WEB服务器软件(Apache、Nginx等)
+2. 如果已安装:
+   - 询问用户是否需要卸载现有服务器
+   - 如果需要卸载:
+     - 询问是否清除配置文件
+     - 根据用户选择执行卸载操作
+   - 如果不需要卸载:
+     - 检查现有配置是否满足需求
+     - 提供配置优化建议
 
-```bash
-# 检查 Nginx
-which nginx || echo "Nginx 未安装"
+### 第二步:服务器软件选择
 
-# 检查 Apache
-which apache2 || which httpd || echo "Apache 未安装"
+如果需要安装新服务器,提供以下选项供用户选择:
 
-# 检查常见端口占用
-netstat -tuln | grep -E ':(80|443|8080)\s'
+**支持的WEB服务器软件:**
+- **Nginx** - 高性能HTTP和反向代理服务器
+- **Apache** - 世界使用排名第一的WEB服务器
+- **Lighttpd** - 轻量级WEB服务器
+- **OpenResty** - 基于Nginx的WEB平台
+- **其他** - 用户自定义输入
+
+使用表单方式询问用户:
+```
+请选择要安装的WEB服务器软件:
+[1] Nginx (推荐用于高并发场景)
+[2] Apache (推荐用于传统WEB应用)
+[3] Lighttpd (推荐用于资源受限环境)
+[4] OpenResty (推荐用于API网关)
+[5] 其他 (自定义输入)
+
+请输入选项编号或名称:
 ```
 
-如果发现已安装的服务器,询问用户:
-- "检测到系统中已安装 [服务器名称],您是否需要卸载它?"
-- 如果用户选择卸载,询问:"是否需要清除配置文件?清除后将删除所有配置,保留则可在重新安装时使用原配置。"
-- 根据用户选择执行相应操作
+### 第三步:网站语言配置
 
-### 第二步:选择WEB服务器软件
+询问用户网站使用的编程语言:
 
-如果需要安装新服务器,向用户展示可用的WEB服务器选项:
+**常用WEB开发语言:**
+- **PHP** - 动态网站开发
+- **Python** - Web应用开发(Django/Flask)
+- **Node.js** - JavaScript运行时
+- **Java** - 企业级应用
+- **Ruby** - Ruby on Rails
+- **Go** - 高性能WEB服务
+- **静态HTML** - 静态网站
+- **其他** - 用户自定义输入
 
-**支持的WEB服务器:**
-1. **Nginx** - 高性能HTTP和反向代理服务器,适合高并发场景
-2. **Apache** - 功能丰富的WEB服务器,模块化设计,兼容性好
-3. **Lighttpd** - 轻量级WEB服务器,适合资源受限环境
-4. **Caddy** - 现代化WEB服务器,自动HTTPS,配置简单
+使用表单询问:
+```
+请选择网站使用的编程语言:
+[1] PHP
+[2] Python
+[3] Node.js
+[4] Java
+[5] Ruby
+[6] Go
+[7] 静态HTML
+[8] 其他 (自定义输入)
 
-询问用户:"请选择您要安装的WEB服务器软件(输入数字1-4):"
+请输入选项编号或名称:
+```
 
-根据用户选择,准备相应的安装命令。
+### 第四步:数据库配置
 
-### 第三步:收集配置信息
+询问用户是否需要数据库支持:
 
-通过表单方式逐步询问用户配置需求:
+```
+是否需要连接数据库服务器? (y/n):
+```
 
-#### 3.1 网站编程语言
+如果需要,提供数据库类型选择:
 
-询问:"您的网站主要使用什么编程语言?"
+**支持的数据库:**
+- **MySQL/MariaDB** - 开源关系型数据库
+- **PostgreSQL** - 高级开源数据库
+- **MongoDB** - NoSQL数据库
+- **Redis** - 内存数据库
+- **Oracle** - 商业数据库(需引导安装)
+- **SQL Server** - 微软商业数据库(需引导安装)
+- **其他** - 用户自定义输入
+
+使用表单询问:
+```
+请选择数据库类型:
+[1] MySQL/MariaDB (推荐用于WEB应用)
+[2] PostgreSQL (推荐用于复杂查询)
+[3] MongoDB (推荐用于文档存储)
+[4] Redis (推荐用于缓存)
+[5] Oracle (商业数据库)
+[6] SQL Server (商业数据库)
+[7] 其他 (自定义输入)
+
+请输入选项编号或名称:
+```
+
+**数据库安装检测:**
+- 如果选择开源数据库(MySQL/PostgreSQL等):
+  - 检测系统是否已安装
+  - 如果已安装:直接进入配置阶段
+  - 如果未安装:帮助用户安装
+- 如果选择商业数据库(Oracle/SQL Server):
+  - 引导用户进行安装(提供安装指南)
+
+**数据库配置参数:**
+询问用户以下配置信息:
+- 数据库root密码
+- 数据库端口(提供默认值)
+- 是否创建应用数据库
+- 应用数据库名称
+- 应用数据库用户名和密码
+
+### 第五步:网站目录配置
+
+询问用户网站文件存放目录:
+
+```
+请输入网站文件存放目录 (默认: /var/www/html):
+```
 
 提供选项:
-1. **PHP** - 适合WordPress、Laravel等应用
-2. **Python** - 适合Django、Flask等应用
-3. **Node.js** - 适合Express、Koa等应用
-4. **Java** - 适合Spring Boot、Tomcat应用
-5. **Ruby** - 适合Rails应用
-6. **静态HTML** - 纯静态网站
-7. **其他** - 自定义输入
+- 使用默认目录
+- 自定义目录路径
+- 让系统自动创建目录
 
-如果用户选择"其他",提示:"请输入您使用的编程语言:"
+配置WEB服务器指向该目录,并提供配置文件路径供用户参考。
 
-#### 3.2 MySQL数据库
+### 第六步:配置文件修改
 
-询问:"您的网站是否需要连接MySQL数据库?(y/n)"
+在安装部署过程中,对于需要修改的配置文件:
 
-如果选择需要(y):
-- 检查MySQL是否已安装:`which mysql`
-- 如果未安装,询问:"是否需要自动部署MySQL服务器?(y/n)"
-- 如果需要部署,执行MySQL安装和基础配置
+1. **告知用户配置文件路径**
+   - 显示配置文件位置
+   - 说明需要修改的配置项
 
-#### 3.3 网站文件目录
+2. **询问修改方式:**
+   ```
+   配置文件修改方式:
+   [1] 自动修改 (推荐)
+   [2] 手动修改 (显示配置文件路径和修改说明)
+   
+   请选择:
+   ```
 
-询问:"请指定网站文件的存放目录(默认:/var/www/html):"
+3. **如果选择自动修改:**
+   - 使用脚本自动修改配置文件
+   - 显示修改内容供用户确认
 
-- 如果用户使用默认值,使用 `/var/www/html`
-- 如果用户自定义路径,验证路径合法性并创建目录
-- 确保目录权限正确设置
+4. **如果选择手动修改:**
+   - 显示配置文件完整路径
+   - 提供详细的修改说明和示例
+   - 等待用户手动修改完成
 
-#### 3.4 域名配置
+### 第七步:安装部署执行
 
-询问:"请输入您的网站域名(如无域名可直接使用IP,留空则使用localhost):"
+根据用户选择执行安装部署:
 
-记录域名信息用于后续配置。
+1. **安装WEB服务器软件**
+   - 使用系统包管理器安装
+   - 或从源码编译安装(如需要)
 
-#### 3.5 端口配置
+2. **安装数据库软件**(如需要)
+   - 使用系统包管理器安装
+   - 配置数据库服务
 
-询问:"WEB服务器监听端口(默认:80):"
+3. **配置WEB服务器**
+   - 配置虚拟主机
+   - 配置PHP/Python等语言支持
+   - 配置数据库连接
 
-验证端口是否被占用,如果被占用提示用户更换。
+4. **启动服务**
+   - 启动WEB服务器服务
+   - 启动数据库服务(如需要)
+   - 设置开机自启动
 
-### 第四步:安装和配置
+### 第八步:创建测试代码
 
-#### 4.1 安装WEB服务器
+创建测试页面验证部署是否成功:
 
-根据用户选择的服务器软件,执行安装:
-
-**Nginx安装:**
-```bash
-# Ubuntu/Debian
-apt-get update && apt-get install -y nginx
-
-# CentOS/RHEL
-yum install -y epel-release && yum install -y nginx
-```
-
-**Apache安装:**
-```bash
-# Ubuntu/Debian
-apt-get update && apt-get install -y apache2
-
-# CentOS/RHEL
-yum install -y httpd
-```
-
-#### 4.2 配置文件管理
-
-安装完成后,告知用户配置文件位置:
-
-**Nginx配置文件:**
-- 主配置: `/etc/nginx/nginx.conf`
-- 站点配置: `/etc/nginx/sites-available/` 和 `/etc/nginx/sites-enabled/`
-- 默认站点: `/etc/nginx/sites-available/default`
-
-**Apache配置文件:**
-- 主配置: `/etc/apache2/apache2.conf` (Debian) 或 `/etc/httpd/conf/httpd.conf` (RHEL)
-- 虚拟主机: `/etc/apache2/sites-available/` 和 `/etc/apache2/sites-enabled/`
-
-询问用户:"是否需要自动配置服务器?(y/n)"
-- 如果选择y,根据之前收集的信息自动生成配置
-- 如果选择n,告知用户配置文件路径和修改方法
-
-#### 4.3 自动配置示例
-
-如果用户选择自动配置,根据服务器类型生成配置:
-
-**Nginx配置示例:**
-```nginx
-server {
-    listen [端口];
-    server_name [域名];
-    root [网站目录];
-    index index.html index.htm index.php;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    # PHP支持(如果需要)
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}
-```
-
-**Apache配置示例:**
-```apache
-<VirtualHost *:[端口]>
-    ServerName [域名]
-    DocumentRoot [网站目录]
-    
-    <Directory [网站目录]>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-    
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
-
-#### 4.4 MySQL部署(如果需要)
-
-如果用户选择部署MySQL:
-
-```bash
-# Ubuntu/Debian
-apt-get install -y mysql-server mysql-client
-
-# CentOS/RHEL
-yum install -y mysql-server mysql
-
-# 启动服务
-systemctl start mysql
-systemctl enable mysql
-
-# 安全配置
-mysql_secure_installation
-```
-
-创建应用数据库和用户:
-```sql
-CREATE DATABASE [数据库名] CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER '[用户名]'@'localhost' IDENTIFIED BY '[密码]';
-GRANT ALL PRIVILEGES ON [数据库名].* TO '[用户名]'@'localhost';
-FLUSH PRIVILEGES;
-```
-
-### 第五步:创建测试代码
-
-为了验证服务器部署是否成功,创建测试页面:
-
-#### 5.1 无MySQL场景测试
-
-创建基础测试文件:
-
-**HTML测试页面 (`[网站目录]/test.html`):**
+**无数据库场景:**
+创建 `test.html` 和 `info.php`(如安装PHP):
 ```html
+<!-- test.html -->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>服务器测试页面</title>
+    <title>WEB服务器测试页面</title>
 </head>
 <body>
     <h1>WEB服务器部署成功!</h1>
@@ -225,151 +205,125 @@ FLUSH PRIVILEGES;
 </html>
 ```
 
-**PHP测试页面 (`[网站目录]/test.php`):**
+**有数据库场景:**
+创建 `db_test.php` 测试数据库连接:
 ```php
 <?php
-phpinfo();
-?>
-```
-
-#### 5.2 有MySQL场景测试
-
-创建数据库连接测试:
-
-**MySQL测试页面 (`[网站目录]/test_mysql.php`):**
-```php
-<?php
+// 数据库连接测试
 $host = 'localhost';
-$user = '[MySQL用户名]';
-$pass = '[MySQL密码]';
-$dbname = '[数据库名]';
+$dbname = 'test_db';
+$user = 'test_user';
+$pass = 'test_password';
 
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-if ($conn->connect_error) {
-    die("连接失败: " . $conn->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    echo "<h1>数据库连接成功!</h1>";
+    echo "<p>数据库: $dbname</p>";
+} catch(PDOException $e) {
+    echo "<h1>数据库连接失败:</h1>";
+    echo "<p>" . $e->getMessage() . "</p>";
 }
-
-echo "MySQL数据库连接成功!<br>";
-echo "服务器信息: " . $conn->server_info;
-
-$conn->close();
 ?>
 ```
 
-### 第六步:启动和验证
+### 第九步:测试验证
 
-#### 6.1 启动服务
+1. 访问测试页面验证WEB服务器
+2. 如有数据库,测试数据库连接
+3. 显示测试结果给用户
+4. 询问是否保留测试文件
 
+### 第十步:清理测试文件
+
+测试完成后,询问用户:
+```
+是否清除测试生成的所有文件? (y/n):
+```
+
+如果选择清除,删除以下文件:
+- test.html
+- info.php
+- db_test.php
+- 其他测试相关文件
+
+## 配置文件参考
+
+### Nginx配置文件路径
+- 主配置: `/etc/nginx/nginx.conf`
+- 站点配置: `/etc/nginx/sites-available/` 和 `/etc/nginx/sites-enabled/`
+- 默认站点: `/etc/nginx/sites-available/default`
+
+### Apache配置文件路径
+- 主配置: `/etc/apache2/apache2.conf` (Debian/Ubuntu)
+- 主配置: `/etc/httpd/conf/httpd.conf` (RHEL/CentOS)
+- 站点配置: `/etc/apache2/sites-available/` 和 `/etc/apache2/sites-enabled/`
+
+### MySQL配置文件路径
+- 配置文件: `/etc/mysql/mysql.conf.d/mysqld.cnf` (Debian/Ubuntu)
+- 配置文件: `/etc/my.cnf` (RHEL/CentOS)
+
+## 常用命令参考
+
+### 服务管理命令
 ```bash
 # Nginx
-systemctl start nginx
-systemctl enable nginx
+sudo systemctl start nginx
+sudo systemctl stop nginx
+sudo systemctl restart nginx
+sudo systemctl status nginx
 
 # Apache
-systemctl start apache2  # 或 httpd
-systemctl enable apache2  # 或 httpd
+sudo systemctl start apache2
+sudo systemctl stop apache2
+sudo systemctl restart apache2
+sudo systemctl status apache2
+
+# MySQL
+sudo systemctl start mysql
+sudo systemctl stop mysql
+sudo systemctl restart mysql
+sudo systemctl status mysql
 ```
 
-#### 6.2 验证部署
-
-检查服务状态:
+### 配置测试命令
 ```bash
-systemctl status [服务名]
+# Nginx配置测试
+sudo nginx -t
+
+# Apache配置测试
+sudo apache2ctl configtest
 ```
 
-测试访问:
-```bash
-curl http://localhost:[端口]/test.html
-curl http://localhost:[端口]/test.php
-```
+## 注意事项
 
-如果配置了MySQL,测试数据库连接:
-```bash
-curl http://localhost:[端口]/test_mysql.php
-```
+1. **所有提示信息使用中文**
+2. **每一步都提供清晰的选项和说明**
+3. **重要操作前确认用户意图**
+4. **提供配置文件路径供用户参考**
+5. **测试完成后清理测试文件**
+6. **记录安装日志供用户查阅**
 
-### 第七步:输出部署报告
+## 错误处理
 
-最后,向用户提供完整的部署报告:
+如果安装过程中出现错误:
+1. 显示详细错误信息
+2. 提供可能的解决方案
+3. 询问用户是否继续或中止
+4. 记录错误日志
 
+## 完成提示
+
+部署完成后显示:
 ```
 ========================================
-WEB服务器部署完成报告
+WEB服务器部署完成!
 ========================================
-
 服务器类型: [Nginx/Apache/...]
-安装路径: [安装路径]
+网站目录: [目录路径]
 配置文件: [配置文件路径]
-网站目录: [网站目录]
-监听端口: [端口]
-域名: [域名]
+数据库: [已安装/未安装]
+测试页面: [URL]
 
-MySQL状态: [已部署/未部署]
-MySQL配置: [如已部署,显示连接信息]
-
-测试页面:
-- HTML测试: http://[域名或IP]:[端口]/test.html
-- PHP测试: http://[域名或IP]:[端口]/test.php
-- MySQL测试: http://[域名或IP]:[端口]/test_mysql.php (如已部署)
-
-服务状态: [运行中/已停止]
-开机自启: [已启用/未启用]
-
-下一步操作建议:
-1. 访问测试页面验证部署
-2. 上传网站文件到指定目录
-3. 根据需要修改配置文件
-4. 配置防火墙规则(如需要外网访问)
-5. 配置SSL证书(如需要HTTPS)
-
+请访问测试页面验证部署是否成功。
 ========================================
 ```
-
-## 重要提示
-
-1. **所有交互必须使用中文** - 与用户的所有对话、提示、错误信息都必须使用中文
-2. **逐步确认** - 每个重要步骤前都要与用户确认,避免误操作
-3. **错误处理** - 如果命令执行失败,提供清晰的错误信息和解决建议
-4. **安全考虑** - 提醒用户修改默认密码、配置防火墙等安全措施
-5. **备份建议** - 修改配置前建议用户备份原配置文件
-6. **权限检查** - 确保以root权限或sudo执行安装命令
-
-## 常见问题处理
-
-### 端口被占用
-```bash
-# 查找占用端口的进程
-netstat -tulnp | grep :[端口]
-# 或
-lsof -i :[端口]
-
-# 提供解决方案:停止占用进程或更换端口
-```
-
-### 权限问题
-```bash
-# 设置正确的目录权限
-chown -R www-data:www-data [网站目录]
-chmod -R 755 [网站目录]
-```
-
-### 服务无法启动
-```bash
-# 检查配置语法
-nginx -t  # Nginx
-apachectl configtest  # Apache
-
-# 查看错误日志
-tail -f /var/log/nginx/error.log
-tail -f /var/log/apache2/error.log
-```
-
-## 支持的操作系统
-
-- Ubuntu 18.04/20.04/22.04
-- Debian 10/11
-- CentOS 7/8
-- RHEL 7/8
-
-根据检测到的系统版本,自动选择正确的包管理器和命令。
