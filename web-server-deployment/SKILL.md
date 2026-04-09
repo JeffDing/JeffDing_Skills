@@ -72,7 +72,10 @@ description: 帮助用户快速搭建和部署WEB服务器。当用户需要安�
    - 否: 跳过此步骤
 
 2. **数据库类型选择**
-   - 列出常用选项:MySQL/MariaDB、PostgreSQL、Oracle、OpenGauss、MongoDB
+   - 列出常用选项:MySQL、MariaDB、PostgreSQL、Oracle、OpenGauss、MongoDB
+   - **重要:** MySQL 和 MariaDB 是两个不同的数据库系统,请明确选择安装其中一个
+   - MySQL: Oracle官方维护的关系型数据库
+   - MariaDB: MySQL的开源分支,完全兼容MySQL
    - 提供"其他"选项供自定义
 
 3. **数据库安装检测**
@@ -278,14 +281,20 @@ yum remove <package>
 ```
 助手: 请问你的网站需要连接数据库吗?
       [Y/n]: y
-      
+
 助手: 请选择数据库类型:
-      1. MySQL/MariaDB
-      2. PostgreSQL
-      3. Oracle
-      4. OpenGauss
-      5. 其他
-      请选择: [1-5]
+      1. MySQL (Oracle官方维护)
+      2. MariaDB (MySQL开源分支,完全兼容)
+      3. PostgreSQL
+      4. Oracle
+      5. OpenGauss
+      6. MongoDB
+      7. 其他
+      请选择: [1-7]
+
+助手: 注意: MySQL和MariaDB是两个不同的数据库系统,请根据你的需求选择:
+      - MySQL: 适合需要Oracle官方支持的场景
+      - MariaDB: 开源免费,性能优化,完全兼容MySQL
 ```
 
 ## 注意事项

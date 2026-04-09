@@ -9,7 +9,7 @@
 - ✅ 支持多种WEB服务器(Apache、Nginx、Tomcat等)
 - ✅ 支持多种开发语言(PHP、Java、Python、Node.js、Go等)
 - ✅ 智能检测已安装服务
-- ✅ 数据库服务器集成(MySQL、PostgreSQL、Oracle、OpenGauss等)
+- ✅ 数据库服务器集成(MySQL、MariaDB、PostgreSQL、Oracle、OpenGauss等)
 - ✅ 自动/手动配置文件管理
 - ✅ 测试代码生成和验证
 - ✅ 全程中文交互
@@ -106,11 +106,16 @@ cp -r /root/web-server-deployment ~/.codeartsdoer/skills/
 - JBoss
 
 ### 数据库服务器
-- MySQL/MariaDB
+- MySQL (Oracle官方维护的关系型数据库)
+- MariaDB (MySQL的开源分支,完全兼容MySQL)
 - PostgreSQL
 - Oracle
 - OpenGauss
 - MongoDB
+
+**注意:** MySQL和MariaDB是两个不同的数据库系统,用户需要明确选择安装其中一个:
+- **MySQL**: Oracle官方维护,适合需要商业支持的场景
+- **MariaDB**: 开源免费,性能优化,完全兼容MySQL,社区活跃
 
 ## 配置文件位置
 
