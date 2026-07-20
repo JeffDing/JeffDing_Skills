@@ -60,9 +60,9 @@ grep -rn "from torch.autograd.profiler_util import" /tmp/opencode/pytorch-offici
 
 | 场景 | 条件 | 动作 | 提交目录 | 分支 |
 |------|------|------|----------|------|
-| **1.1** | 社区有用例 + 需 NPU 适配 | 生成 `.patch` 提交 | `test_upstream/` | 2.7.1/2.9.0/2.10.0/2.11.0/2.12.0（**不含 master**） |
+| **1.1** | 社区有用例 + 需 NPU 适配 | 生成 `.patch` 提交 | `test_upstream/` | 2.7.1/2.9.0/2.11.0/2.12.0（**不含 master**） |
 | **1.2** | 社区有用例 + 无需任何修改 | 仅在 issue 说明，无 PR | — | — |
-| **1.3** | 社区无用例 | 自写用例 | `test/` | 2.7.1/2.9.0/2.10.0/2.11.0/2.12.0 **+ master** |
+| **1.3** | 社区无用例 | 自写用例 | `test/` | 2.7.1/2.9.0/2.11.0/2.12.0 **+ master** |
 
 > 记住：`test/` 场景含 master，`test_upstream/` 场景不含 master。
 
@@ -119,11 +119,11 @@ python3 -m flake8 --config=/path/to/torch-npu/.flake8 test/xxx/test_yyy.py
 
 ---
 
-## 5. 阶段四：准备 6 个分支
+## 5. 阶段四：准备 5 个分支
 
 ```bash
 # fork 必须选「全部分支」，否则远程分支不存在
-for v in v2.7.1 v2.9.0 v2.10.0 v2.11.0 v2.12.0 master; do
+for v in v2.7.1 v2.9.0 v2.11.0 v2.12.0 master; do
   git clone --depth 1 -b $v https://gitcode.com/Ascend/pytorch.git torch-npu-$v
 done
 ```
