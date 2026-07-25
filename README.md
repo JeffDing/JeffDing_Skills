@@ -54,3 +54,15 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ```
 使用web-server-deployment安装部署一个PHP服务器
 ```
+
+## torch-npu-api-alignment：TorchNPU API
+安装方法:
+```
+从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/torch-npu-api-alignment 安装skills 到 ~/.codeartsdoer/skills/
+
+从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/torch-npu-pr-review 安装skills 到 ~/.codeartsdoer/skills/
+```
+使用示例：
+```
+使用torch-npu-api-alignment进行XXXX API对齐任务
+```
