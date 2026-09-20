@@ -1,0 +1,26 @@
+{
+  "skill_name": "typhoon-research",
+  "evals": [
+    {
+      "id": 1,
+      "name": "single-typhoon-comprehensive-analysis",
+      "prompt": "帮我分析2017年台风Hato（天鸽）的路径、强度演变和降水特征。我手头有IBTrACS的西北太平洋数据（在./data/IBTrACS.WP.nc），也有ERA5再分析数据。能不能先画路径图和强度时间序列，然后看看登陆时的降水分布？最后给一份分析报告。",
+      "expected_output": "包含台风路径图、强度演变时间序列图、降水空间分布图的结构化分析报告，使用Python脚本处理数据，引用了最佳路径和ERA5数据",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "climate-trend-enso-analysis",
+      "prompt": "我想看看西北太平洋台风频数的长期变化趋势，从1970到2023年的。另外想分析一下台风活动和ENSO有没有关系，手头有IBTrACS数据和Niño3.4指数。能不能做Mann-Kendall趋势检验，然后看看El Niño和La Niña年台风频数有没有显著差异？最好用R语言做统计。",
+      "expected_output": "包含年频数统计图、Mann-Kendall趋势检验结果、ENSO相关分析图和统计表的报告，R脚本可运行",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "rapid-intensification-literature-review",
+      "prompt": "我在研究台风快速增强(RI)这个方向，想先了解一下目前RI研究的最新进展。帮我搜索一下近5年关于热带气旋快速增强的重要文献，重点关注：(1)RI的环境条件判据，(2)RI的预报方法，特别是深度学习方面的新进展，(3)RI的物理机制。能不能给我生成一个文献综述？另外，我用ERA5算了一些RI和非RI台风的环境场（SST、切变、中层湿度），想做RI vs非RI的对比分析。",
+      "expected_output": "包含文献检索结果、文献综述文本、RI vs非RI环境因子对比分析的报告，Python脚本可运行",
+      "files": []
+    }
+  ]
+}

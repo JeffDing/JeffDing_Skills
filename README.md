@@ -48,9 +48,19 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ## web-server-deployment：Web服务器搭建
 安装方法:
 ```
-从https://gitcode.com/JeffDing/JeffDing_Skills/tree/main/web-server-deployment 安装skills 到 ~/.codeartsdoer/skills/
+从https://atomgit.com/JeffDing/JeffDing_Skills/tree/main/web-server-deployment 安装skills 到 ~/.codeartsdoer/skills/
 ```
 使用示例：
 ```
 使用web-server-deployment安装部署一个PHP服务器
+```
+
+## typhoon-mesoscale：台风（热带气旋）科研研究
+安装方法：
+```
+从https://atomgit.com/JeffDing/JeffDing_Skills/tree/main/typhoon-mesoscale 安装skills 到 ~/.codeartsdoer/skills/
+```
+使用示例：
+```
+使用typhoon-mesoscale分析台风路径和降水特征
 ```
