@@ -64,3 +64,13 @@ https://bbs.huaweicloud.com/forum/thread-0212720827157145508-1-1.html
 ```
 使用typhoon-mesoscale分析台风路径和降水特征
 ```
+
+## typhoon-mesoscale-lite：台风（热带气旋）科研研究（纯 SKILL.md 版）
+安装方法：
+```
+从https://atomgit.com/JeffDing/JeffDing_Skills/tree/main/typhoon-mesoscale-lite 安装skills 到 ~/.codeartsdoer/skills/
+```
+使用示例：
+```
+使用typhoon-mesoscale-lite分析台风路径和降水特征
+```
